@@ -1,0 +1,2 @@
+using System.Drawing.Drawing2D; using static System.Net.Mime.MediaTypeNames;  namespace JapaneseCrossingApp {     public class Police : Person     {         public Police(int leftX, int leftY, int rightX, int rightY, int boatLeftX, int boatLeftY, int boatRightX, int boatRightY)             : base(leftX, leftY, rightX, rightY, boatLeftX, boatLeftY, boatRightX, boatRightY)         {         }          public override string Name => "Полицейский";         public override bool CanOperateBoat => true;          public override Bitmap Image => Properties.Resources.police;
+	} } 
