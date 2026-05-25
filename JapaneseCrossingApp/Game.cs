@@ -192,9 +192,9 @@ namespace JapaneseCrossingApp
 		{
 			return new List<Person>
 			{
-				new Police(100, 250, 900, 100),
+				new Police(100, 250, 900, 250),
 
-				new Criminal(160, 250, 900, 220),
+				new Criminal(160, 250, 980, 270),
 
 				new Daughter(40, 270, 1030, 100),
 				new Daughter(5, 300, 1030, 220),
@@ -202,10 +202,23 @@ namespace JapaneseCrossingApp
 				new Son(40, 350, 1030, 340),
 				new Son(5, 380, 1030, 460),
 
-				new Mother(70, 300, 900, 340),
+				new Mother(70, 300, 960, 340),
 
-				new Father(120, 300, 900, 460),
+				new Father(120, 300, 950, 360),
 			};
+		}
+
+		public string GetCurrentMoveDescription(SideKind targetSide)
+		{
+			var passengers = Boat.Passengers
+				.Select(person => person.Name)
+				.ToList();
+
+			var direction = targetSide == SideKind.Right
+				? "→"
+				: "←";
+
+			return $"{MoveCount + 1}. {string.Join(" + ", passengers)} {direction}";
 		}
 	}
 }

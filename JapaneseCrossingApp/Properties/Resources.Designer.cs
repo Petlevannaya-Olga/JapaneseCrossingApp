@@ -113,6 +113,26 @@ namespace JapaneseCrossingApp.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_arrow_40 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-arrow-40", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_arrow_pointing_left_40 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-arrow-pointing-left-40", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap mother {
             get {
                 object obj = ResourceManager.GetObject("mother", resourceCulture);
