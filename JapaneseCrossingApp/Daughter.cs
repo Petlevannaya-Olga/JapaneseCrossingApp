@@ -4,8 +4,8 @@ namespace JapaneseCrossingApp
 {
     public class Daughter : Person
     {
-        public Daughter(int leftX, int leftY, int rightX, int rightY, int boatLeftX, int boatLeftY, int boatRightX, int boatRightY)
-            : base(leftX, leftY, rightX, rightY, boatLeftX, boatLeftY, boatRightX, boatRightY)
+        public Daughter(int leftX, int leftY, int rightX, int rightY)
+            : base(leftX, leftY, rightX, rightY)
         {
         }
 

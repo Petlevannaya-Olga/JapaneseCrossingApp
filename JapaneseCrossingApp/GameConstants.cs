@@ -8,7 +8,7 @@ namespace JapaneseCrossingApp
         public const int BoatStartX = 120;
         public const int BoatY = 400;
         public const int BoatLeftX = 120;
-        public const int BoatRightX = 520;
+        public const int BoatRightX = 950;
         public const int BoatMoveStep = 20;
         public const int RightSideOffset = 380;
         public const int LeftBankBorderX = 100;
