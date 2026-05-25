@@ -14,6 +14,10 @@ namespace JapaneseCrossingApp
 			Position = LeftSidePosition;
 		}
 
+		public bool IsOnRightSide => Position == RightSidePosition;
+
+		public FacingDirection FacingDirection { get; private set; } = FacingDirection.Right;
+
 		public int Width { get; } = 100;
 		public int Height { get; } = 100;
 
@@ -41,6 +45,7 @@ namespace JapaneseCrossingApp
 			InBoat = false;
 
 			Position = LeftSidePosition;
+			FacingDirection = FacingDirection.Right;
 		}
 
 		public void MoveToRightSide()
@@ -49,21 +54,24 @@ namespace JapaneseCrossingApp
 			InBoat = false;
 
 			Position = RightSidePosition;
+			FacingDirection = FacingDirection.Left;
 		}
 
-		public void MoveToBoatSeat(Point seatPosition, BoatSeat seat)
+		public void MoveToBoatSeat(
+			Point seatPosition,
+			BoatSeat seat,
+			SideKind targetSide)
 		{
 			if (seat == BoatSeat.None)
-			{
-				throw new ArgumentException(
-					"Для посадки нужно указать место в лодке",
-					nameof(seat));
-			}
+				throw new ArgumentException("Для посадки нужно указать место в лодке", nameof(seat));
 
 			Seat = seat;
 			InBoat = true;
-
 			Position = seatPosition;
+
+			FacingDirection = targetSide == SideKind.Right
+				? FacingDirection.Right
+				: FacingDirection.Left;
 		}
 
 		public void MoveBy(int dx, int dy = 0)
@@ -75,12 +83,16 @@ namespace JapaneseCrossingApp
 
 		public virtual void Draw(Graphics graphics)
 		{
-			graphics.DrawImage(
-				Image,
-				X,
-				Y,
-				Width,
-				Height);
+			if (FacingDirection == FacingDirection.Left)
+			{
+				graphics.TranslateTransform(X + Width, Y);
+				graphics.ScaleTransform(-1, 1);
+				graphics.DrawImage(Image, 0, 0, Width, Height);
+				graphics.ResetTransform();
+				return;
+			}
+
+			graphics.DrawImage(Image, X, Y, Width, Height);
 		}
 
 		public virtual bool IsActive(int x, int y)

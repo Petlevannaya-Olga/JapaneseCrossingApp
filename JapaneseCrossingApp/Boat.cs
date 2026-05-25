@@ -28,9 +28,33 @@ namespace JapaneseCrossingApp
 
 		public IReadOnlyCollection<Person> Passengers => _seats.Keys;
 
+		public SideKind MovingToSide { get; private set; } = SideKind.Right;
+
 		public void Draw(Graphics graphics)
 		{
-			graphics.DrawImage(_image, X, Y, Width, Height);
+			if (MovingToSide == SideKind.Left)
+			{
+				graphics.TranslateTransform(X + Width, Y);
+				graphics.ScaleTransform(-1, 1);
+
+				graphics.DrawImage(
+					_image,
+					0,
+					0,
+					Width,
+					Height);
+
+				graphics.ResetTransform();
+
+				return;
+			}
+
+			graphics.DrawImage(
+				_image,
+				X,
+				Y,
+				Width,
+				Height);
 		}
 
 		public bool TryEmbark(
@@ -98,7 +122,10 @@ namespace JapaneseCrossingApp
 
 				var position = GetSeatPosition(seat);
 
-				person.MoveToBoatSeat(position, seat);
+				person.MoveToBoatSeat(
+					position,
+					seat,
+					MovingToSide);
 			}
 		}
 
@@ -119,6 +146,11 @@ namespace JapaneseCrossingApp
 
 				_ => throw new ArgumentOutOfRangeException(nameof(seat))
 			};
+		}
+
+		public void StartMove(SideKind targetSide)
+		{
+			MovingToSide = targetSide;
 		}
 	}
 }

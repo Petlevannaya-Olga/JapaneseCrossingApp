@@ -64,7 +64,11 @@ namespace JapaneseCrossingApp
 					"В лодке нет больше места");
 			}
 
-			person.MoveToBoatSeat(seatPosition, seat);
+			var targetSide = ActiveSide == SideKind.Left
+				? SideKind.Right
+				: SideKind.Left;
+
+			person.MoveToBoatSeat(seatPosition, seat, targetSide);
 
 			GetRiverSide(ActiveSide).Remove(person);
 		}
@@ -109,6 +113,8 @@ namespace JapaneseCrossingApp
 				GetRiverSide(ActiveSide).Passengers);
 
 			_targetSide = targetSide;
+
+			Boat.StartMove(targetSide);
 
 			IsAnimationRunning = true;
 
@@ -192,17 +198,17 @@ namespace JapaneseCrossingApp
 		{
 			return new List<Person>
 			{
-				new Police(100, 250, 900, 250),
+				new Police(100, 250, 910, 290),
 
-				new Criminal(160, 250, 980, 270),
+				new Criminal(160, 250, 980, 250),
 
-				new Daughter(40, 270, 1030, 100),
-				new Daughter(5, 300, 1030, 220),
+				new Daughter(40, 270, 960, 300),
+				new Daughter(5, 300, 1000, 300),
 
 				new Son(40, 350, 1030, 340),
-				new Son(5, 380, 1030, 460),
+				new Son(5, 380, 1010, 380),
 
-				new Mother(70, 300, 960, 340),
+				new Mother(70, 300, 980, 340),
 
 				new Father(120, 300, 950, 360),
 			};
